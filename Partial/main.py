@@ -1,7 +1,8 @@
 import random
 import numpy as np
+from pgmpy.factors.discrete import TabularCPD
 from pgmpy.models import BayesianNetwork
-from pgmpy.estimators import BaseEstimator, MaximumLikelihoodEstimator
+from pgmpy.estimators import MaximumLikelihoodEstimator
 from pgmpy.inference import VariableElimination
 import pandas as pd
 import arviz as az
@@ -73,6 +74,24 @@ def sim_game():
 
     # Returnam playerul care a inceput, numarul de steme din prima runda, numarul de steme din a doua runda si castigatorul
     return (Player1, n, nr_steme, winner)
+
+
+def make_bayesian_network():
+    model = BayesianNetwork([('P0', 'W'), ('P1', 'W')])
+    p0 = TabularCPD(variable="P0", variable_card=2, values=[[0.33], [0.66]])
+    p1 = TabularCPD(variable="P1", variable_card=2, values=[[0.5], [0.5]])
+    first = TabularCPD(variable="first", variable_card=2, values=[[0.5], [0.5]])
+    r1 = TabularCPD(variable='R1', variable_card=2,
+                        values=[[0.33, 0.5],
+                                [0.66, 0.5]],
+                        evidence=['first'],
+                        evidence_card=[2])
+    r2 = TabularCPD(variable='R2', variable_card=3,
+                        values=[[0.5, 0.25, 0.33, 0.12],
+                                [0.5, 0.5, 0.66, 0.44],
+                                [0, 0.25, 0, 0.44]],
+                        evidence=['first', 'R1'],
+                        evidence_card=[2, 2])
 
 
 if __name__ == "__main__":
