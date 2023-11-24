@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 # Generam 200 de timpi medii folosind mle:
 np.random.seed(42)
 wait_times = np.random.uniform(low=0, high=20, size=200)
+
+# Si afisam histograma acestor timpi
 plt.hist(wait_times)
 plt.show()
 

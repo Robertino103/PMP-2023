@@ -81,6 +81,7 @@ if __name__ == "__main__":
     nr_win_p0 = 0
     nr_win_p1 = 0
 
+    # Simulam jocul de 20k ori si numaram castigurile (returnate pe pozitia 3 in tupla de return a sim_game())
     for i in range(20000):
         if sim_game()[3] == 0:
             nr_win_p0 += 1
@@ -111,3 +112,6 @@ if __name__ == "__main__":
     # Determinam fata monedei din prima runda in functie de faptul ca in runda 2 nu s-a obtinut nicio stema
     inference = VariableElimination(model)
     print(inference.query(variables=['StemeR1'], evidence={'StemeR2': 0}))
+
+    # Daca StemeR1(0) are probabilitate mai mare, inseamna ca e mai probabil ca in prima runda sa fi picat 'ban'
+    # Similar in mod invers, cu StemeR1(1), unde ar fi mai probabil sa pice 'stema'
