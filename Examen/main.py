@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import arviz as az
 
 
-def read_data():
-    csv_path = 'Titanic.csv'
+def read_data(filename):
+    csv_path = filename
 
     df = pd.read_csv(csv_path)
 
@@ -21,7 +21,7 @@ def read_data():
 
 if __name__ == "__main__":
 
-    df = read_data()
+    df = read_data(filename='Titanic.csv')
 
     with pm.Model() as model:
         alpha = pm.Normal('alpha', mu=0, sigma=10)

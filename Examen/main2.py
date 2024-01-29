@@ -51,5 +51,5 @@ if __name__ == "__main__":
     #
     # print(error)
 
+    print("Probabilitate Monte Carlo estimata: ")
     print(monte_carlo(N=10000))
-    
